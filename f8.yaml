@@ -1,0 +1,24 @@
+general:
+  name: codenames
+components:
+  - type: stateful
+    name: codenames
+    containers:
+      - dir: ./
+        readyCheck:
+          httpGet:
+            port: 9091
+            path: /
+    expose:
+      - servicePort: 9091
+        containerPort: 9091
+        external: true
+    volumeMountPath: /app/db
+tests:
+  - name: func
+    containers:
+      - image: centos
+        command:
+          - /bin/bash
+          - '-c'
+          - 'curl codenames:9091'
