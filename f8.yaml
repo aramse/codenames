@@ -21,4 +21,4 @@ tests:
         command:
           - /bin/bash
           - '-c'
-          - 'curl codenames:9091'
+          - 'curl -v --fail codenames:9091'
