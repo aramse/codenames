@@ -42,7 +42,7 @@ export const Lobby = ({ defaultGameID }) => {
     }
 
     axios
-      .post('/next-game', {
+      .post('next-game', {
         game_id: newGameName,
         word_set: combinedWordSet,
         create_new: false,
