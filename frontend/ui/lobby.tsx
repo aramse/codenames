@@ -51,7 +51,7 @@ export const Lobby = ({ defaultGameID }) => {
         enforce_timer: timer && timer.length && enforceTimerEnabled,
       })
       .then(() => {
-        const newURL = (document.location.pathname = '/' + newGameName);
+        const newURL = (document.location.pathname + newGameName);
         window.location = newURL;
       });
   }
