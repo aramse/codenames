@@ -78,7 +78,7 @@ export const Lobby = ({ defaultGameID }) => {
           <p className="intro">
             Play Codenames online across multiple devices on a shared board. To
             create a new game or join an existing game, enter a game identifier
-            and click 'GO'.
+            and click 'Go'.
           </p>
           <input
             type="text"
