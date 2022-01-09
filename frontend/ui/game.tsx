@@ -232,7 +232,7 @@ export class Game extends React.Component {
     }
 
     axios
-      .post('/next-game', {
+      .post('next-game', {
         game_id: this.state.game.id,
         word_set: this.state.game.word_set,
         create_new: true,
