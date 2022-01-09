@@ -22,7 +22,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const defaultListenAddr = ":9091"
+const defaultListenAddr = ":80"
 const expiryDur = -24 * time.Hour
 
 func main() {
