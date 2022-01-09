@@ -9,24 +9,34 @@ pipeline {
     F8_ENVIRONMENT = "$BRANCH_NAME"
     F8_ENV_TYPE = "dev"
     F8_LOG_LINKS = "true"
+    
+    BUILD_CMD = "f8 build --push"
+    DEPLOY_CMD = "f8 deploy"
+    TEST_CMD = "f8 test"
   }
 
   stages {
     stage('Build') {
       steps {
-        withDockerRegistry([url: 'https://gcr.io', credentialsId: 'reg-creds']) {
-          sh 'f8 build --push'
+        script {
+          if (env.REG_USER != ""){ 
+            docker.withRegistry(env.REG_AUTH_URL, env.REG_CREDS_ID) {
+              sh env.BUILD_CMD
+            }
+          } else {
+            sh env.BUILD_CMD
+          }
         }
       }
     }
     stage('Deploy') {
       steps {
-        sh 'f8 deploy'
+        sh env.DEPLOY_CMD
       }
     }
     stage('Test') {
       steps {
-        sh 'f8 test'
+        sh env.TEST_CMD
       }
     }
   }
