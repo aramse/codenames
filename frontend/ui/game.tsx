@@ -143,7 +143,7 @@ export class Game extends React.Component {
     }
 
     axios
-      .post('/game-state', {
+      .post('game-state', {
         game_id: this.props.gameID,
         state_id: state_id,
       })
