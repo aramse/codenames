@@ -7,11 +7,11 @@ components:
       - dir: ./
         readyCheck:
           httpGet:
-            port: 9091
+            port: 80
             path: /
     expose:
-      - servicePort: 9091
-        containerPort: 9091
+      - servicePort: 80
+        containerPort: 80
         external: true
     volumeMountPath: /app/db
 tests:
@@ -21,4 +21,4 @@ tests:
         command:
           - /bin/bash
           - '-c'
-          - 'curl -v --fail codenames:9091'
+          - 'curl -v --fail codenames'
