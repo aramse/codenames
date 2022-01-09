@@ -181,7 +181,7 @@ export class Game extends React.Component {
     }
 
     axios
-      .post('/guess', {
+      .post('guess', {
         game_id: this.state.game.id,
         index: idx,
       })
@@ -212,7 +212,7 @@ export class Game extends React.Component {
 
   public endTurn() {
     axios
-      .post('/end-turn', {
+      .post('end-turn', {
         game_id: this.state.game.id,
         current_round: this.state.game.round,
       })
