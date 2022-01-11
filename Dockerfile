@@ -6,10 +6,11 @@ RUN apk add gcc musl-dev \
     && go build ./cmd/codenames/main.go
 
 # Build frontend.
-FROM node:12-alpine as frontend
+FROM node:12-slim as frontend
 COPY . /app
 WORKDIR /app/frontend
-RUN npm install -g parcel-bundler \
+RUN apt-get udpate && apt-get install -y python \
+    && npm install -g parcel-bundler \
     && npm install \
     && sh build.sh
 
