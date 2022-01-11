@@ -9,7 +9,7 @@ RUN apk add gcc musl-dev \
 FROM node:12-slim as frontend
 COPY . /app
 WORKDIR /app/frontend
-RUN apt-get udpate && apt-get install -y python \
+RUN apt-get update && apt-get install -y python \
     && npm install -g parcel-bundler \
     && npm install \
     && sh build.sh
