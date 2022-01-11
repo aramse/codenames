@@ -7,10 +7,11 @@ RUN apk add gcc musl-dev \
 
 # Build frontend.
 FROM node:12-slim as frontend
+USER root
 COPY . /app
 WORKDIR /app/frontend
-RUN apt-get update && apt-get install -y python \
-    && npm install -g parcel-bundler \
+RUN apt-get update && apt-get install -y python make g++ gcc \
+    && npm install -g parcel-bundler --unsafe-perm=true --allow-root \
     && npm install \
     && sh build.sh
 
