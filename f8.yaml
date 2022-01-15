@@ -2,7 +2,7 @@ general:
   name: codenames
 components:
   - type: stateful
-    name: codenames
+    name: web
     containers:
       - dir: ./
         readyCheck:
