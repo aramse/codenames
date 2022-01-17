@@ -425,13 +425,6 @@ export class Game extends React.Component {
             Next game
           </button>
         </form>
-        <!--
-        <div id="coffee">
-          <a href="https://www.buymeacoffee.com/jbowens" target="_blank">
-            Buy the developer a coffee.
-          </a>
-        </div>
-        -->
       </div>
     );
   }
