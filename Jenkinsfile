@@ -1,8 +1,5 @@
 import static io.aramse.f8.Utils.*
 
-def MAIN_BRANCHES = ["master", "main"]
-def MERGED_BRANCH = getMergedBranch(this)
-
 pipeline {
   agent any
   options {
@@ -18,6 +15,11 @@ pipeline {
     BUILD_CMD = "f8 build --push"
     DEPLOY_CMD = "f8 deploy"
     TEST_CMD = "f8 test"
+  }
+
+  script {
+    def MAIN_BRANCHES = ["master", "main"]
+    def MERGED_BRANCH = getMergedBranch(this)
   }
 
   stages {
