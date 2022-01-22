@@ -17,12 +17,13 @@ pipeline {
     TEST_CMD = "f8 test"
   }
 
-  script {
-    def MAIN_BRANCHES = ["master", "main"]
-    def MERGED_BRANCH = getMergedBranch(this)
-  }
-
   stages {
+    stage('Setup') {
+      script {
+        def MAIN_BRANCHES = ["master", "main"]
+        def MERGED_BRANCH = getMergedBranch(this)
+      }    
+    }
     stage('Delete Merged Env') {
       when {
         expression {
