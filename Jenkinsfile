@@ -1,5 +1,8 @@
 import static io.aramse.f8.Utils.*
 
+def MAIN_BRANCHES
+def MERGED_BRANCH
+
 pipeline {
   agent any
   options {
@@ -21,8 +24,8 @@ pipeline {
     stage('Setup') {
       steps {
         script {
-          def MAIN_BRANCHES = ["master", "main"]
-          def MERGED_BRANCH = getMergedBranch(this)
+          MAIN_BRANCHES = ["master", "main"]
+          MERGED_BRANCH = getMergedBranch(this)
         }
       }
     }
@@ -36,7 +39,6 @@ pipeline {
         sh 'f8 delete --env ' + MERGED_BRANCH
       }
     }
-      
     stage('Build') {
       steps {
         script {
