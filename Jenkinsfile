@@ -1,7 +1,7 @@
-script {
-  def MAIN_BRANCHES = ["master", "main"]
-  def MERGED_BRANCH = get_merged_branch()
-}
+import static io.aramse.f8.Utils.*
+
+def MAIN_BRANCHES = ["master", "main"]
+def MERGED_BRANCH = getMergedBranch()
 
 pipeline {
   agent any
