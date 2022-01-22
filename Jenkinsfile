@@ -5,7 +5,7 @@ pipeline {
   }  
   environment {
     COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-    MAIN_BRANCHES = ["master", "main"]
+    MAIN_BRANCHES = "master,main"
     MERGED_BRANCH = get_merged_branch()
     F8_TAG = "$BRANCH_NAME-$BUILD_ID-$COMMIT_HASH"
     F8_ENVIRONMENT = "$BRANCH_NAME"
@@ -18,7 +18,7 @@ pipeline {
   }
 
   stages {
-    if (env.MAIN_BRANCHES.contains(env.BRANCH_NAME) && env.MERGED_BRANCH) {
+    if (env.MAIN_BRANCHES.split(',').contains(env.BRANCH_NAME) && env.MERGED_BRANCH) {
       stage('Delete Env ' + merged_branch) {
         sh 'f8 delete --env ' + env.MERGED_BRANCH
       }
