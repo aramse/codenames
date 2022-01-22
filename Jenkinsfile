@@ -5,6 +5,8 @@ pipeline {
   }  
   environment {
     COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+    MAIN_BRANCHES = ["master", "main"]
+    MERGED_BRANCH = get_merged_branch()
     F8_TAG = "$BRANCH_NAME-$BUILD_ID-$COMMIT_HASH"
     F8_ENVIRONMENT = "$BRANCH_NAME"
     F8_ENV_TYPE = "dev"
@@ -16,10 +18,15 @@ pipeline {
   }
 
   stages {
+    if (env.MAIN_BRANCHES.contains(env.BRANCH_NAME) && env.MERGED_BRANCH) {
+      stage('Delete Env ' + merged_branch) {
+        sh 'f8 delete --env ' + env.MERGED_BRANCH
+      }
+    }
     stage('Build') {
       steps {
         script {
-          if (env.REG_USER != ""){ 
+          if (env.REG_USER != "") { 
             docker.withRegistry(env.REG_AUTH_URL, env.REG_CREDS_ID) {
               sh env.BUILD_CMD
             }
@@ -37,6 +44,16 @@ pipeline {
     stage('Test') {
       steps {
         sh env.TEST_CMD
+      }
+    }
+  }
+  if (env.SLACK_ENABLED == 'true') {
+    post {
+      success {
+        slackNotify('SUCCESS')
+      }
+      failure {
+        slackNotify('FAILURE')
       }
     }
   }
