@@ -18,9 +18,11 @@ pipeline {
   }
 
   stages {
-    if (env.MAIN_BRANCHES.split(',').contains(env.BRANCH_NAME) && env.MERGED_BRANCH) {
-      stage('Delete Env ' + merged_branch) {
-        sh 'f8 delete --env ' + env.MERGED_BRANCH
+    script {
+      if (env.MAIN_BRANCHES.split(',').contains(env.BRANCH_NAME) && env.MERGED_BRANCH) {
+        stage('Delete Env ' + merged_branch) {
+          sh 'f8 delete --env ' + env.MERGED_BRANCH
+        }
       }
     }
     stage('Build') {
@@ -47,12 +49,14 @@ pipeline {
       }
     }
   }
-  if (env.SLACK_ENABLED == 'true') {
-    post {
-      success {
+  post {
+    success {
+      if (env.SLACK_ENABLED == 'true') {
         slackNotify('SUCCESS')
       }
-      failure {
+    }
+    failure {
+      if (env.SLACK_ENABLED == 'true') {
         slackNotify('FAILURE')
       }
     }
