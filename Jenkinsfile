@@ -1,11 +1,10 @@
+def MAIN_BRANCHES = ["master", "main"]
+def MERGED_BRANCH = get_merged_branch()
+
 pipeline {
   agent any
   options {
     disableConcurrentBuilds()
-  }
-  script {
-    MAIN_BRANCHES = ["master", "main"]
-    MERGED_BRANCH = get_merged_branch()
   }
   environment {
     COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
