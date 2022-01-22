@@ -2,11 +2,13 @@ pipeline {
   agent any
   options {
     disableConcurrentBuilds()
-  }  
+  }
+  script {
+    MAIN_BRANCHES = ["master", "main"]
+    MERGED_BRANCH = get_merged_branch()
+  }
   environment {
     COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-    MAIN_BRANCHES = "master,main"
-    MERGED_BRANCH = get_merged_branch()
     F8_TAG = "$BRANCH_NAME-$BUILD_ID-$COMMIT_HASH"
     F8_ENVIRONMENT = "$BRANCH_NAME"
     F8_ENV_TYPE = "dev"
@@ -18,10 +20,16 @@ pipeline {
   }
 
   stages {
-        stage('Delete Env ' + merged_branch) {
-          when {env.MAIN_BRANCHES.split(',').contains(env.BRANCH_NAME) && env.MERGED_BRANCH}
-          sh 'f8 delete --env ' + env.MERGED_BRANCH
+    stage('Delete Merged Env') {
+      when {
+        expression {
+          MAIN_BRANCHES.contains(env.BRANCH_NAME) && MERGED_BRANCH
         }
+      }
+      steps {
+        sh 'f8 delete --env ' + MERGED_BRANCH
+      }
+    }
       
     stage('Build') {
       steps {
@@ -49,13 +57,17 @@ pipeline {
   }
   post {
     success {
-      if (env.SLACK_ENABLED == 'true') {
-        slackNotify('SUCCESS')
+      script {
+        if (env.SLACK_ENABLED == 'true') {
+          slackNotify('SUCCESS')
+        }
       }
     }
     failure {
-      if (env.SLACK_ENABLED == 'true') {
-        slackNotify('FAILURE')
+      script {
+        if (env.SLACK_ENABLED == 'true') {
+          slackNotify('FAILURE')
+        }
       }
     }
   }
