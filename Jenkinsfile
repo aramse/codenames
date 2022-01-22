@@ -60,14 +60,14 @@ pipeline {
     success {
       script {
         if (env.SLACK_ENABLED == 'true') {
-          slackNotify('SUCCESS')
+          slackNotify(this, 'SUCCESS')
         }
       }
     }
     failure {
       script {
         if (env.SLACK_ENABLED == 'true') {
-          slackNotify('FAILURE')
+          slackNotify(this, 'FAILURE')
         }
       }
     }
