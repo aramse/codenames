@@ -1,5 +1,7 @@
-def MAIN_BRANCHES = ["master", "main"]
-def MERGED_BRANCH = get_merged_branch()
+script {
+  def MAIN_BRANCHES = ["master", "main"]
+  def MERGED_BRANCH = get_merged_branch()
+}
 
 pipeline {
   agent any
