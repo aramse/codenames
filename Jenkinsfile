@@ -19,10 +19,12 @@ pipeline {
 
   stages {
     stage('Setup') {
-      script {
-        def MAIN_BRANCHES = ["master", "main"]
-        def MERGED_BRANCH = getMergedBranch(this)
-      }    
+      steps {
+        script {
+          def MAIN_BRANCHES = ["master", "main"]
+          def MERGED_BRANCH = getMergedBranch(this)
+        }
+      }
     }
     stage('Delete Merged Env') {
       when {
