@@ -18,13 +18,11 @@ pipeline {
   }
 
   stages {
-    script {
-      if (env.MAIN_BRANCHES.split(',').contains(env.BRANCH_NAME) && env.MERGED_BRANCH) {
         stage('Delete Env ' + merged_branch) {
+          when {env.MAIN_BRANCHES.split(',').contains(env.BRANCH_NAME) && env.MERGED_BRANCH}
           sh 'f8 delete --env ' + env.MERGED_BRANCH
         }
-      }
-    }
+      
     stage('Build') {
       steps {
         script {
