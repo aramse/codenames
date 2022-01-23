@@ -258,3 +258,4 @@ func shuffle(rnd *rand.Rand, teamAssignments []Team) {
 		teamAssignments[i], teamAssignments[j] = teamAssignments[j], teamAssignments[i]
 	}
 }
+
