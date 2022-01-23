@@ -1,7 +1,7 @@
 import static io.aramse.f8.Utils.*
 
-def MAIN_BRANCHES
-def MERGED_BRANCH
+def mainBranches = ["master", "main"]
+def mergedBranch
 
 pipeline {
   agent any
@@ -24,19 +24,18 @@ pipeline {
     stage('Setup') {
       steps {
         script {
-          MAIN_BRANCHES = ["master", "main"]
-          MERGED_BRANCH = getMergedBranch(this)
+          mergedBranch = getMergedBranch(this)
         }
       }
     }
     stage('Delete Merged Env') {
       when {
         expression {
-          MAIN_BRANCHES.contains(env.BRANCH_NAME) && MERGED_BRANCH
+          mainBranches.contains(env.BRANCH_NAME) && mergedBranch
         }
       }
       steps {
-        sh 'f8 delete --env ' + MERGED_BRANCH
+        sh 'f8 delete --env ' + mergedBranch
       }
     }
     stage('Build') {
@@ -64,17 +63,10 @@ pipeline {
     }
   }
   post {
-    success {
+    always {
       script {
         if (env.SLACK_ENABLED == 'true') {
-          slackNotify(this, 'SUCCESS')
-        }
-      }
-    }
-    failure {
-      script {
-        if (env.SLACK_ENABLED == 'true') {
-          slackNotify(this, 'FAILURE')
+          slackNotify(this, currentBuild.result)
         }
       }
     }
