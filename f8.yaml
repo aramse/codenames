@@ -22,4 +22,3 @@ tests:
           - /bin/bash
           - '-c'
           - 'curl -v --fail web'
-
