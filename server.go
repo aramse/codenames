@@ -177,6 +177,8 @@ func (s *Server) handleGuess(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+        log.Printf("Processing guess for game %s at index %d\n", request.GameID, request.Index)
+
 	gh := s.getGame(request.GameID)
 
 	var err error
@@ -225,6 +227,9 @@ func (s *Server) handleNextGame(rw http.ResponseWriter, req *http.Request) {
 		http.Error(rw, "Error decoding", 400)
 		return
 	}
+
+        log.Printf("Starting new game with ID %s\n", request.GameID)
+
 	wordSet := map[string]bool{}
 	for _, w := range request.WordSet {
 		wordSet[strings.TrimSpace(strings.ToUpper(w))] = true
