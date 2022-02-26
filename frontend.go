@@ -38,6 +38,9 @@ type templateParameters struct {
 }
 
 func (s *Server) handleIndex(rw http.ResponseWriter, req *http.Request) {
+
+        log.Printf("handling request at index")
+
 	dir, id := filepath.Split(req.URL.Path)
 	if dir != "" && dir != "/" {
 		http.NotFound(rw, req)

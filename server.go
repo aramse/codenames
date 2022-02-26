@@ -3,7 +3,6 @@ package codenames
 import (
 	"crypto/subtle"
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -178,7 +177,7 @@ func (s *Server) handleGuess(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-        fmt.Fprintf(os.Stderr, "Processing guess for game %s at index %d\n", request.GameID, request.Index)
+        log.Printf("Processing guess for game %s at index %d\n", request.GameID, request.Index)
 
 	gh := s.getGame(request.GameID)
 
@@ -229,7 +228,7 @@ func (s *Server) handleNextGame(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-        fmt.Fprintf(os.Stderr, "Starting new game with ID %s\n", request.GameID)
+        log.Printf("Starting new game with ID %s\n", request.GameID)
 
 	wordSet := map[string]bool{}
 	for _, w := range request.WordSet {
