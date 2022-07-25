@@ -13,7 +13,7 @@ components:
       - servicePort: 80
         containerPort: 80
         external: true
-    volumeMountPath: /data/db
+    volumeMountPath: /app/db
 tests:
   - name: func
     containers:
