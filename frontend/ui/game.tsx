@@ -317,9 +317,6 @@ export class Game extends React.Component {
       shareLink = (
         <div id="share" class="text-center">
           Send this link to friends:&nbsp;
-          //<a className="url" href={window.location.href}>
-          //  {window.location.href}
-          //</a>
           <div id="qr-share">
           </div>
         </div>
