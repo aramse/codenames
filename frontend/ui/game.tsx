@@ -5,8 +5,6 @@ import Timer from '~/ui/timer';
 import ReactDOM from "react-dom";
 import QRCode from "react-qr-code";
 
-ReactDOM.render(<QRCode value="http://f8.aramse.io" />, document.getElementById("qr-share"));
-
 const defaultFavicon =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA8SURBVHgB7dHBDQAgCAPA1oVkBWdzPR84kW4AD0LCg36bXJqUcLL2eVY/EEwDFQBeEfPnqUpkLmigAvABK38Grs5TfaMAAAAASUVORK5CYII=';
 const blueTurnFavicon =
@@ -318,6 +316,7 @@ export class Game extends React.Component {
         <div id="share" class="text-center">
           Send this link to friends:&nbsp;
           <div id="qr-share">
+            <QRCode value="http://f8.aramse.io" />
           </div>
         </div>
       );
