@@ -2,6 +2,10 @@ import * as React from 'react';
 import axios from 'axios';
 import { Settings, SettingsButton, SettingsPanel } from '~/ui/settings';
 import Timer from '~/ui/timer';
+import ReactDOM from "react-dom";
+import QRCode from "react-qr-code";
+
+ReactDOM.render(<QRCode value="http://f8.aramse.io" />, document.getElementById("qr-share"));
 
 const defaultFavicon =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA8SURBVHgB7dHBDQAgCAPA1oVkBWdzPR84kW4AD0LCg36bXJqUcLL2eVY/EEwDFQBeEfPnqUpkLmigAvABK38Grs5TfaMAAAAASUVORK5CYII=';
@@ -311,11 +315,13 @@ export class Game extends React.Component {
     let shareLink = null;
     if (!this.state.settings.fullscreen) {
       shareLink = (
-        <div id="share">
+        <div id="share" class="text-center">
           Send this link to friends:&nbsp;
-          <a className="url" href={window.location.href}>
-            {window.location.href}
-          </a>
+          //<a className="url" href={window.location.href}>
+          //  {window.location.href}
+          //</a>
+          <div id="qr-share">
+          </div>
         </div>
       );
     }
