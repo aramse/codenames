@@ -2,6 +2,8 @@ import * as React from 'react';
 import axios from 'axios';
 import { Settings, SettingsButton, SettingsPanel } from '~/ui/settings';
 import Timer from '~/ui/timer';
+import ReactDOM from "react-dom";
+import QRCode from "react-qr-code";
 
 const defaultFavicon =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA8SURBVHgB7dHBDQAgCAPA1oVkBWdzPR84kW4AD0LCg36bXJqUcLL2eVY/EEwDFQBeEfPnqUpkLmigAvABK38Grs5TfaMAAAAASUVORK5CYII=';
@@ -311,11 +313,12 @@ export class Game extends React.Component {
     let shareLink = null;
     if (!this.state.settings.fullscreen) {
       shareLink = (
-        <div id="share">
-          Send this link to friends:&nbsp;
-          <a className="url" href={window.location.href}>
-            {window.location.href}
-          </a>
+        <div id="share" className="centered">
+          Play with friends:
+          <br/><br/>
+          <div id="qr-share">
+            <QRCode value={window.location.href} size="96" />
+          </div>
         </div>
       );
     }
@@ -342,7 +345,6 @@ export class Game extends React.Component {
         }
       >
         <div id="infoContent">
-          {shareLink}
           {timer}
         </div>
         <div id="status-line" className={statusClass}>
@@ -400,6 +402,11 @@ export class Game extends React.Component {
           }
           role="radiogroup"
         >
+          <button
+            onClick={(e) => window.open('https://f8-trial.aramse.io')}
+          >
+            Deploy on f8
+          </button>
           <SettingsButton
             onClick={(e) => {
               this.toggleSettingsView(e);
@@ -425,6 +432,7 @@ export class Game extends React.Component {
             Next game
           </button>
         </form>
+        {shareLink}
       </div>
     );
   }
