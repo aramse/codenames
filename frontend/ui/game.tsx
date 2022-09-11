@@ -314,9 +314,10 @@ export class Game extends React.Component {
     if (!this.state.settings.fullscreen) {
       shareLink = (
         <div id="share" class="text-center">
-          Send this link to friends:&nbsp;
+          Play with friends:
+          <br><br>
           <div id="qr-share">
-            <QRCode value="http://f8.aramse.io" />
+            <QRCode value={window.location.ref} size=96 />
           </div>
         </div>
       );
@@ -344,7 +345,6 @@ export class Game extends React.Component {
         }
       >
         <div id="infoContent">
-          {shareLink}
           {timer}
         </div>
         <div id="status-line" className={statusClass}>
@@ -402,6 +402,12 @@ export class Game extends React.Component {
           }
           role="radiogroup"
         >
+          <button
+            onClick={(e) => window.open('https://f8-trial.aramse.io')}
+            style="margin-right:10px"
+          >
+            Deploy on f8
+          </button>
           <SettingsButton
             onClick={(e) => {
               this.toggleSettingsView(e);
@@ -427,6 +433,7 @@ export class Game extends React.Component {
             Next game
           </button>
         </form>
+        {shareLink}
       </div>
     );
   }
