@@ -372,3 +372,7 @@
   color: #000;
   font-weight: bold;
 }
+
+.deployButton {
+  margin-right: 50px;
+}
