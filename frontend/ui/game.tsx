@@ -317,7 +317,7 @@ export class Game extends React.Component {
           Play with friends:
           <br><br>
           <div id="qr-share">
-            <QRCode value={window.location.ref} size="96" />
+            <QRCode value={window.location.href} size="96" />
           </div>
         </div>
       );
