@@ -403,7 +403,7 @@ export class Game extends React.Component {
           role="radiogroup"
         >
           <button
-            onClick={(e) => window.open('https://f8-trial.aramse.io')}
+            onClick="window.open('https://f8-trial.aramse.io')"
             style="margin-right:10px"
           >
             Deploy on f8
