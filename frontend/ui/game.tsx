@@ -432,7 +432,9 @@ export class Game extends React.Component {
             Next game
           </button>
         </form>
+        <br/><br/>
         {shareLink}
+        <br/><br/>
       </div>
     );
   }
