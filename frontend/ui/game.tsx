@@ -313,7 +313,7 @@ export class Game extends React.Component {
     let shareLink = null;
     if (!this.state.settings.fullscreen) {
       shareLink = (
-        <div id="share" style="text-align:center">
+        <div id="share" className="centered">
           Play with friends:
           <br/><br/>
           <div id="qr-share">
