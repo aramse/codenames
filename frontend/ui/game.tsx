@@ -315,7 +315,7 @@ export class Game extends React.Component {
       shareLink = (
         <div id="share" class="text-center">
           Play with friends:
-          <br><br>
+          <br/><br/>
           <div id="qr-share">
             <QRCode value={window.location.href} size="96" />
           </div>
