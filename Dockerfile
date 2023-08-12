@@ -6,11 +6,11 @@ RUN apk add gcc musl-dev \
     && go build ./cmd/codenames/main.go
 
 # Build frontend.
-FROM node:20-slim as frontend
+FROM node:18-alpine as frontend
 USER root
 COPY . /app
 WORKDIR /app/frontend
-RUN apt update -y --allow-releaseinfo-change && apt-get install -y python-is-python3 make g++ gcc \
+RUN apk update && apk add python-is-python3 make g++ gcc \
     && npm install -g parcel-bundler --unsafe-perm=true --allow-root \
     && npm install \
     && sh build.sh
