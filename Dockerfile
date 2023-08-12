@@ -10,7 +10,7 @@ FROM node:20-slim as frontend
 USER root
 COPY . /app
 WORKDIR /app/frontend
-RUN apt-get update && apt-get install -y python-is-python3 make g++ gcc \
+RUN apt-get update --allow-releaseinfo-change && apt-get install -y python-is-python3 make g++ gcc \
     && npm install -g parcel-bundler --unsafe-perm=true --allow-root \
     && npm install \
     && sh build.sh
