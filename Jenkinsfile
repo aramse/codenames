@@ -27,6 +27,7 @@ pipeline {
           mergedBranch = getMergedBranch(this)
           if (env.REG_USER != "") { 
             docker.withRegistry(env.REG_AUTH_URL, env.REG_CREDS_ID) {
+              sh 'pwd && ls -l'
               sh env.BUILD_CMD
             }
           } else {
